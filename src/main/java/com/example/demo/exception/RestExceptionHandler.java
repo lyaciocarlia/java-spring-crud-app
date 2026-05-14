@@ -21,6 +21,11 @@ public class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(payload(ex.getMessage()));
     }
 
+    @ExceptionHandler(UsernameAlreadyTakenException.class)
+    public ResponseEntity<Map<String, Object>> handleUsernameTaken(UsernameAlreadyTakenException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(payload(ex.getMessage()));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidation(MethodArgumentNotValidException ex) {
         String message = ex.getBindingResult().getFieldErrors().stream()
